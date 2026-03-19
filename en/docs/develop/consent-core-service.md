@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ## Using Consent Core Service
 
 The consent management [extension points](consent-management-manage.md) can invoke the Consent core service. WSO2 Open 

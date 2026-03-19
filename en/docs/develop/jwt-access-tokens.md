@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 JSON Web Token (JWT) is an open standard of transmitting information securely between two parties. As the tokens 
 are digitally signed, the information is secured. The authentication and authorization process uses JWT access tokens. 
 It is ideal to use JWT access tokens as API credentials because JWT access tokens can carry claims (data) that are used 

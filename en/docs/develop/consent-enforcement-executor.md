@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 The Consent Enforcement executor ensures that the API consumer application is performing an action on the requested 
 resource with the permission of that resource owner. In an open banking scenario, the bank customer is the resource 
 owner who grants permission. Then, the API consumer applications can access their bank details including the 

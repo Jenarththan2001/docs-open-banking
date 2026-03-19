@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ## Writing a custom Gateway Executor
 
 The WSO2 Open Banking Accelerator contains extension points known as Open Banking Executors that can validate and 

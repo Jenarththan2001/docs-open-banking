@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 The WSO2 API Gateway acts as a proxy between the API consumer applications and the bank back-end servers. The API 
 Gateway applies various policies to ensure the validity of API requests and their responses. This proxy applies both 
 open banking and API management related policies.
