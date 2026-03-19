@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ##Writing a custom claim provider
 
 The `OBClaimProvider` class is an extension that lets you customize and create your own claim provider and add 

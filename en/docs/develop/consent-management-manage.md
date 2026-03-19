@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 WSO2 Open Banking Accelerator consists of endpoints to manage consents. You can customize relevant components 
 according to your requirements using the extension points available. This section explains the 
 Consent Manage component and how to customize the `/manage` endpoint.

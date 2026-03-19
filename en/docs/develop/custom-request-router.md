@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ## Writing a custom Request Router
 
 The API consumers use the open banking API for various open banking scenarios such as 

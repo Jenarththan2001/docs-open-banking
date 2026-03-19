@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ##  Writing Custom Throttling Keys
 
 Custom throttling allows system administrators to define dynamic rules for specific use cases. When a custom throttling 

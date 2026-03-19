@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ##Writing a Custom Response Type Handler
 
 The Response Type handler contains an extension. According to your requirements, you can extend and override the methods 

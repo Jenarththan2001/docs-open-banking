@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ## Writing a custom ID Token Builder
 
 The default ID Token Builder in WSO2 Open Banking provides the pairwise subject calculation for authorization and token 

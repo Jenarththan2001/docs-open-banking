@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 This section explains how to customize the default authentication steps according to your requirements. 
 
 !!!note

@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ## Writing a custom Application Management Listener 
 
 The Application Management Listener contains an extension. According to your requirements, you can extend and override 

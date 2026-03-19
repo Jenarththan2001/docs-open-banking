@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 The **API Consumer Validation** service in WSO2 Open Banking allows banks to validate API consumers from the National 
 Competent Authorities (NCAs). This is done by validating the transport layer certificate an API consumer has obtained. 
 

@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 According to your open banking requirements, you can customize the capabilities of WSO2 Open Banking Accelerator. This 
 section explains how to get started with implementing customizations and implementing your own toolkit.
 
