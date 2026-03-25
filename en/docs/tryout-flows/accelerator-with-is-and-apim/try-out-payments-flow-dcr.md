@@ -153,6 +153,23 @@ The response contains a Consent ID. A sample response looks as follows:
 }
 ```
 
+#### With UK JWS Header Processing Policy
+
+If you have enabled the [UK JWS Header Processing Policy](../../learn/uk-jws-header-processing-policy.md), the payload of this request must be digitally signed using your TPP Private Key. You must generate a Detached JWS (Header..Signature) and pass it in the `x-jws-signature` HTTP header. The payload used to generate the signature **must exactly match** the JSON body of your request (no extra spaces or newlines).
+
+```
+curl --location --request POST 'https://localhost:8243/open-banking/v3.1/pisp/payment-consents' \
+--header 'Authorization: Bearer <AUTH_HEADER_VALUE>' \
+--header 'x-fapi-financial-id: open-bank' \
+--header 'Content-Type: application/json' \
+--header 'x-idempotency-key: 709909' \
+--header 'x-jws-signature: <JWS_SIGNATURE>' \
+--cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+--data '<REQUEST_PAYLOAD>'
+```
+
+- `x-jws-signature`: A detached JWS signature of the request body signed with your TPP private key.
+
 ### Step 3: Authorizing a consent
 
 The API consumer application redirects the bank customer to authenticate and approve/deny application-provided consents.
@@ -362,3 +379,22 @@ The TPP must ensure that the Initiation and Risk sections of payment match the c
     }
 }
 ```
+
+#### With UK JWS Header Processing Policy
+
+Just like Step 2, if you have enabled the [UK JWS Header Processing Policy](../../learn/uk-jws-header-processing-policy.md), this request **must be signed** with a Detached JWS using your TPP Private Key.
+
+```
+curl -X POST \
+https://localhost:8243/open-banking/v3.1/pisp/payments \
+-H 'x-fapi-financial-id: open-bank' \
+-H 'Authorization: Bearer <AUTH_HEADER_VALUE>' \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json; charset=UTF-8' \
+-H 'x-idempotency-key: 249667' \
+-H 'x-jws-signature: <JWS_SIGNATURE>' \
+--cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+--data '<REQUEST_PAYLOAD>'
+```
+
+- `x-jws-signature`: A detached JWS signature of the request body signed with your TPP private key.
