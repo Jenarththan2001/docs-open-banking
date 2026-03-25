@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 ##Writing a Custom Request Object Validator
 A Request Object contains authentication and authorization request parameters in a self-contained JWT. It is used in the 
 authorization endpoint of WSO2 Identity Server. Banks can use this authorization endpoint 

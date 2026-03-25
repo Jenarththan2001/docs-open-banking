@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 The key ID (kid) parameter is used to identify a unique key. This value allows identity providers such as WSO2 Identity 
 Server to provide a simple name to identify their signing key, and then repeat that identifier in the tokens they issue.
 For more information on scenarios where the kid value is used, see 

@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 When onboarding API consumer/TPP applications **via WSO2 API Manager Developer Portal**, you can request additional 
 application properties. To do this, implement the following interface and extend the default capabilities of 
 application creation in Key Manager:

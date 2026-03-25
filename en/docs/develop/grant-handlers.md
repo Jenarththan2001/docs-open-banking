@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 The WSO2 Identity Server provides OAuth Grant Handlers that are useful when you want to support an OAuth flow that is 
 different from standard grant types. They validate the grant, scopes, and access delegation. For more information, see 
 [Identity Server documentation](https://is.docs.wso2.com/en/5.11.0/learn/extension-points-for-oauth/#oauth-grant-handler).

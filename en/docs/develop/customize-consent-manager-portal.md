@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 This page explains how the developers can plug in the required toolkit code and customize the Consent Manager Portal by modifying or adding files.
 
 !!! info

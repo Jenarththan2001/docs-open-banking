@@ -1,3 +1,5 @@
+--8<-- "deprecated-banner.md"
+
 WSO2 Open Banking Accelerator contains a default introspection data provider implementation in the 
 `OBDefaultIntrospectionDataProvider` class. 
 
