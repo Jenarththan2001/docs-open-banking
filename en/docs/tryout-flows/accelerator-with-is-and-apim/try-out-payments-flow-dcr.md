@@ -170,6 +170,37 @@ curl --location --request POST 'https://localhost:8243/open-banking/v3.1/pisp/pa
 
 - `x-jws-signature`: A detached JWS signature of the request body signed with your TPP private key.
 
+#### With JWE Payload Processing Policy
+
+If you have enabled the [JWE Payload Processing Policy](../../learn/jwe-payload-processing-policy.md), the request payload must be encrypted as a JWE (JSON Web Encryption) compact serialization using the server's public key. You must also add the following custom message builder and formatter configurations to the `deployment.toml` file inside the `<APIM_HOME>/repository/conf` folder:
+
+``` toml
+[[custom_message_builders]]
+content_type = "application/jose+jwe"
+class = "org.apache.axis2.format.PlainTextBuilder"
+
+[[custom_message_formatters]]
+content_type = "application/jose+jwe"
+class = "org.apache.axis2.format.PlainTextFormatter"
+```
+
+After adding the above configuration, restart the API Manager server.
+
+The consent initiation request with JWE encryption looks as follows:
+
+```
+curl --location --request POST 'https://localhost:8243/open-banking/v3.1/pisp/payment-consents' \
+--header 'Authorization: Bearer <AUTH_HEADER_VALUE>' \
+--header 'x-fapi-financial-id: open-bank' \
+--header 'Content-Type: application/jose+jwe' \
+--header 'x-idempotency-key: 709909' \
+--cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+--data '<JWE_ENCRYPTED_PAYLOAD>'
+```
+
+- `Content-Type`: Must be set to `application/jose+jwe` to trigger the JWE decryption mediator.
+- `<JWE_ENCRYPTED_PAYLOAD>`: The request body encrypted as a JWE compact serialization (5 base64url-encoded parts separated by dots). Encrypt the JSON payload using the server's public certificate (e.g., `wso2carbon` alias from the server keystore) with the algorithm and encryption method configured in the policy (e.g., `RSA-OAEP-256` and `A256GCM`).
+
 ### Step 3: Authorizing a consent
 
 The API consumer application redirects the bank customer to authenticate and approve/deny application-provided consents.
@@ -398,3 +429,22 @@ https://localhost:8243/open-banking/v3.1/pisp/payments \
 ```
 
 - `x-jws-signature`: A detached JWS signature of the request body signed with your TPP private key.
+
+#### With JWE Payload Processing Policy
+
+Just like Step 2, if you have enabled the [JWE Payload Processing Policy](../../learn/jwe-payload-processing-policy.md), this request payload must be encrypted as a JWE compact serialization.
+
+```
+curl -X POST \
+https://localhost:8243/open-banking/v3.1/pisp/payments \
+-H 'x-fapi-financial-id: open-bank' \
+-H 'Authorization: Bearer <AUTH_HEADER_VALUE>' \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/jose+jwe' \
+-H 'x-idempotency-key: 249667' \
+--cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+--data '<JWE_ENCRYPTED_PAYLOAD>'
+```
+
+- `Content-Type`: Must be set to `application/jose+jwe` to trigger the JWE decryption mediator.
+- `<JWE_ENCRYPTED_PAYLOAD>`: The request body encrypted as a JWE compact serialization using the server's public certificate.
