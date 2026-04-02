@@ -42,12 +42,24 @@ If you want to build the Financial Services APIM Mediation Policies from the sou
     - `Custom sequences` - Synapse based custom sequence files which need to copy in to `<APIM_HOME>/repository/deployment/server/synapse-configs/default/sequences` folder.
     - `lib` - This folder contains the jars need to copy in to `<APIM_Home>/repository/components/lib` folder. It contains jars of the class mediator implementations refer from the policies and custom synapse handler implementations.
         
-3. Add the following configuration to `deployment.toml` file inside the `<APIM_HOME>/repository/conf` folder.
+3. Add the following configurations to the `deployment.toml` file inside the `<APIM_HOME>/repository/conf` folder.
 
     ``` toml
     [synapse_handlers.jws_response_signature_handler]
     enabled = true
     class = "org.wso2.financial.services.apim.mediation.policies.jws.header.processing.handler.JwsResponseHeaderHandler"
+    ```
+
+    Add the following custom message builder and formatter to handle the `application/jose+jwe` content type:
+
+    ``` toml
+    [[custom_message_builders]]
+    content_type = "application/jose+jwe"
+    class = "org.apache.axis2.format.PlainTextBuilder"
+
+    [[custom_message_formatters]]
+    content_type = "application/jose+jwe"
+    class = "org.apache.axis2.format.PlainTextFormatter"
     ```
 
 4. Restart the API Manager Server.
