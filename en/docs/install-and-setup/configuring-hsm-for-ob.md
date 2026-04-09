@@ -140,7 +140,8 @@ Replace the placeholders with values specific to your HSM:
 Generate an RSA key pair inside the HSM. The private key will remain in the HSM and the corresponding certificate 
 will be used for signature verification.
 
-You can use the Java `keytool` utility with the PKCS#11 provider to generate a key pair directly in the HSM:
+You can use the Java `keytool` utility with the PKCS#11 provider to generate a key pair directly in the HSM.
+Run this command on **each server** (Identity Server and API Manager) that will use HSM:
 
 ``` bash
 keytool -genkeypair \
@@ -153,15 +154,18 @@ keytool -genkeypair \
   -keystore NONE \
   -storetype PKCS11 \
   -providerClass sun.security.pkcs11.SunPKCS11 \
-  -providerArg <IS_HOME>/repository/resources/security/pkcs11.cfg \
+  -providerArg <PRODUCT_HOME>/repository/resources/security/pkcs11.cfg \
   -storepass <HSM_PIN>
 ```
 
 !!! note
+    - Replace `<PRODUCT_HOME>` with `<IS_HOME>` or `<APIM_HOME>` depending on the server.
     - The `-keystore NONE` and `-storetype PKCS11` flags instruct `keytool` to use the HSM instead of a file-based 
       keystore.
     - The `-storepass` is the HSM user PIN, not a file password.
     - The `-alias` value must match the `alias` configured in `[keystore.hsm]` in the `deployment.toml` file.
+    - Each server generates its own key pair in its own HSM partition. If the Identity Server and API Manager share 
+      the same HSM partition and slot, a single key pair is sufficient.
 
 Verify that the key pair was created successfully:
 
@@ -170,13 +174,13 @@ keytool -list \
   -keystore NONE \
   -storetype PKCS11 \
   -providerClass sun.security.pkcs11.SunPKCS11 \
-  -providerArg <IS_HOME>/repository/resources/security/pkcs11.cfg \
+  -providerArg <PRODUCT_HOME>/repository/resources/security/pkcs11.cfg \
   -storepass <HSM_PIN>
 ```
 
 Expected output:
 
-```
+``` text
 Keystore type: PKCS11
 Keystore provider: SunPKCS11-<PROVIDER_NAME>
 
@@ -357,13 +361,13 @@ Check the server startup logs to confirm that the HSM keystore was loaded succes
 
 **Expected log entry:**
 
-```
+``` text
 [INFO] {KeyStoreManager} - Primary keystore loaded successfully ---SunPKCS11-<PROVIDER_NAME> version XX
 ```
 
 If the HSM is not configured correctly, you will see an error similar to:
 
-```
+``` text
 [ERROR] {KeyStoreManager} - Error loading HSM keystore
 ```
 
