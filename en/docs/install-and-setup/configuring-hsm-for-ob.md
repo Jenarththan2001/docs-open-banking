@@ -302,9 +302,10 @@ alias = "wso2carbon"
 key_password = "wso2carbon"
 ```
 
-!!! warning
-    When HSM is enabled, do **not** configure the `[keystore.primary]` section in the API Manager `deployment.toml`. 
-    The HSM takes over as the primary keystore for signing operations. Configuring both may cause conflicts.
+!!! info
+    When HSM is enabled, the `[keystore.primary]` configuration is not used for signing operations — the HSM 
+    keystore takes over automatically. However, you can keep `[keystore.primary]` configured as a fallback for 
+    when HSM is disabled. There is no conflict between having both sections present.
 
 ### Configuration reference
 
