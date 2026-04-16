@@ -116,7 +116,7 @@ curl -X DELETE \
 
 #### Sample Response — 204 No Content
 
-```
+```http
 HTTP/1.1 204 No Content
 ```
 
@@ -287,7 +287,7 @@ curl -X GET \
 
 #### Sample Response — 204 No Content
 
-```
+```http
 HTTP/1.1 204 No Content
 ```
 
