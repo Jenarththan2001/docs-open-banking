@@ -162,7 +162,8 @@ keytool -genkeypair \
     - Replace `<PRODUCT_HOME>` with `<IS_HOME>` or `<APIM_HOME>` depending on the server.
     - The `-keystore NONE` and `-storetype PKCS11` flags instruct `keytool` to use the HSM instead of a file-based 
       keystore.
-    - The `-storepass` is the HSM user PIN, not a file password.
+    - The `-storepass` is the HSM user PIN, not a file password. You can omit `-storepass` to be prompted 
+      interactively, which avoids exposing the PIN in shell history and process listings.
     - The `-alias` value must match the `alias` configured in `[keystore.hsm]` in the `deployment.toml` file.
     - Each server generates its own key pair in its own HSM partition. If the Identity Server and API Manager share 
       the same HSM partition and slot, a single key pair is sufficient.
@@ -262,6 +263,11 @@ provider_configuration = "pkcs11.cfg"
     The `provider_configuration` value is the filename of the PKCS#11 configuration file created in 
     [Step 1](#step-1-create-the-pkcs11-provider-configuration-file). It is resolved relative to 
     `<IS_HOME>/repository/resources/security/`.
+
+!!! warning
+    The HSM PIN is stored in plain text in `deployment.toml`. In production environments, use WSO2's 
+    [secure vault](https://is.docs.wso2.com/en/latest/deploy/security/encrypt-passwords-with-cipher-tool/) to 
+    encrypt the PIN value. See [Security best practices](#security-best-practices) for more details.
 
 Ensure that the primary keystore is configured. The primary keystore is used for TLS and other non-HSM operations:
 
@@ -394,8 +400,8 @@ server:
 enabled = false
 ```
 
-Restart the servers. The platform will automatically fall back to using the configured file-based keystore 
-(`[keystore.primary]` or `[keystore.tls]`).
+Restart the servers. The platform will automatically fall back to using the configured file-based keystore. 
+For the Identity Server, this is `[keystore.primary]`. For the API Manager, this is `[keystore.tls]`.
 
 !!! info
     Disabling HSM does not require any code changes or redeployment of accelerator components. The switch is 
