@@ -128,8 +128,12 @@ nav:
         #     - 'Set up CIBA flow': learn/ciba-set-up-flow.md
     - 'Consent Management':
       - 'Introduction': learn/consent-management.md
-      - 'Built-in Validations': learn/consent-management-validations.md
-      - 'Tryout': learn/consent-management-try-out.md
+      - 'Tryout a Basic Consent Flow': learn/consent-management-try-out.md
+      - 'Consent Management Endpoints':
+        - 'Consent Manage Endpoint': learn/consent-management-endpoint.md
+        - 'Consent Authorize Endpoint': learn/consent-management-authorize.md
+        - 'Consent Validate Endpoint': learn/consent-management-validate.md
+        - 'Consent Admin Endpoint': learn/consent-management-admin.md
       - 'Consent Manager': learn/consent-manager.md
     - 'Consent Authorization': learn/consent-authorization-intro.md
     - 'API Security':
